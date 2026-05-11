@@ -29,15 +29,27 @@ other internal AI agents.
 ### Quick demo
 
 ```sh
-git clone <repo-url>
+git clone https://github.com/reshmaworld-Wellnestre/procurebot.git
 cd procurebot
 python3 -m venv .venv
 .venv/bin/pip install -e ".[dev]"
-.venv/bin/pytest -v               # 16/16 pass — no API key needed
-cp .env.example .env              # add your ANTHROPIC_API_KEY for live chat
-.venv/bin/uvicorn procurebot.main:app --reload --port 8000
-# open http://localhost:8000
+.venv/bin/pytest -v               # 22/22 pass — no API key needed
 ```
+
+### Try it in the browser — two modes
+
+**🎬 Demo mode** — no API key, works offline, uses canned responses:
+```sh
+PROCUREBOT_DEMO_MODE=1 .venv/bin/uvicorn procurebot.main:app --reload --port 8000
+```
+
+**🤖 Live mode** — real Claude responses:
+```sh
+cp .env.example .env              # then edit .env and paste ANTHROPIC_API_KEY=sk-ant-...
+.venv/bin/uvicorn procurebot.main:app --reload --port 8000
+```
+
+Open <http://localhost:8000>.
 
 ### Try the 5 deck scenarios
 

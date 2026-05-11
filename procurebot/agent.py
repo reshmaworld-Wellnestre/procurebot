@@ -44,6 +44,10 @@ class AnthropicLike(Protocol):
 
 
 def _real_client():  # pragma: no cover — exercised via the live UI, not tests
+    if os.environ.get("PROCUREBOT_DEMO_MODE", "").lower() in {"1", "true", "yes", "on"}:
+        from .demo_client import DemoClient
+        logger.info("Demo mode active — using scripted DemoClient (no API calls).")
+        return DemoClient()
     from anthropic import Anthropic
     return Anthropic()
 
